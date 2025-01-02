@@ -6,7 +6,7 @@ import { setTasks } from '../redux/tasksSlice';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector(state => state.tasks.tasks);
+  const tasks = useSelector((state) => state.tasks.tasks);
 
   // Fetch tasks from an API
   useEffect(() => {
@@ -20,16 +20,26 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Tasks</h1>
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id}>
-            <Link to={`/edit-task/${task.id}`}>{task.title}</Link>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
+      <h1 className="text-3xl font-bold text-blue-600 mb-6">Task Manager</h1>
+      <ul className="w-full max-w-lg bg-white rounded-lg shadow-lg p-4 divide-y divide-gray-200">
+        {tasks.map((task) => (
+          <li key={task.id} className="py-4 flex justify-between items-center">
+            <Link
+              to={`/edittask/${task.id}`}
+              className="text-lg font-medium text-gray-800 hover:text-blue-500"
+            >
+              {task.title}
+            </Link>
           </li>
         ))}
       </ul>
-      <Link to="/add-task">Add New Task</Link>
+      <Link
+        to="/addtask"
+        className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+      >
+        Add New Task
+      </Link>
     </div>
   );
 };
